@@ -56,7 +56,7 @@ public class PlayerControls : MonoBehaviour
 
         if(velocity < allowedForce)
         {
-            rigidbody.AddForce(Vector3.up * jump * force);
+            rigidbody.AddForce(gameObject.transform.up * jump * force);
         }
         
     }
