@@ -30,7 +30,9 @@ public class GameControl : MonoBehaviour
     {
 
         startScreen = Instantiate(startScreenSource, canvas.transform);
-        ResetGame();
+        roundTime = 0.0f;
+        startRound = 0.0f; 
+        ResetPlayerAndBall();
         PauseGame();
 
     }
@@ -38,6 +40,10 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Start();
+        }
         if (Input.GetKeyDown(KeyCode.Space) && gamePaused)
         {
             PlayGame();
@@ -49,6 +55,10 @@ public class GameControl : MonoBehaviour
         if (!gamePaused)
         {
             roundTime = Time.time - startRound;
+        }
+        if(player.transform.position.y < 0)
+        {
+            ResetPlayerAndBall();
         }
 
     }
@@ -64,9 +74,10 @@ public class GameControl : MonoBehaviour
         endScreenScore.GetComponent<TextMeshProUGUI>().text = $"Round Time: {roundTime.ToString("0.00")}\nCurrent Record: {previousRecord.ToString("0.00")}";
     }
 
-    void ResetGame()
+    void ResetPlayerAndBall()
     {
         player.transform.position = new Vector3(0, 100.1f, 0);
+        player.transform.rotation = new Quaternion(0, 0, 0, 0);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         ball.transform.position = new Vector3(5, 105, 5);
@@ -75,7 +86,7 @@ public class GameControl : MonoBehaviour
 
     void PlayGame()
     {
-        ResetGame();
+        ResetPlayerAndBall();
         startRound = Time.time;
         roundTime = 0f;
         Time.timeScale = 1f;
@@ -96,7 +107,5 @@ public class GameControl : MonoBehaviour
         gamePaused = true;
         Time.timeScale = 0f;
     }
-
-
 
 }

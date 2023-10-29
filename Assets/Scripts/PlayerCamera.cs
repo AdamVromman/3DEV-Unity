@@ -9,6 +9,7 @@ public class PlayerCamera : MonoBehaviour
     public float yOffset = 2.0f;
     public float zOffset = -5.0f;
     public float Turnspeed = 2.0f;
+    public Transform ball;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,6 @@ public class PlayerCamera : MonoBehaviour
     void Update()
     {
         transform.position = player.transform.position + new Vector3(0, yOffset, zOffset);
-
+        transform.LookAt(ball);
     }
 }

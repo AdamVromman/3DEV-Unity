@@ -9,6 +9,8 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform player;
     public Transform playerObj;
     public Rigidbody rb;
+    public Transform aimPoint;
+    public Transform ball;
 
     public float rotationSpeed;
 
@@ -20,12 +22,13 @@ public class ThirdPersonCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Vector3 dirToCombatLookAt = orientation.position - new Vector3(transform.position.x, orientation.position.y, transform.position.z);
-        orientation.forward = dirToCombatLookAt.normalized;
+    void LateUpdate()
+    { 
 
+        Vector3 dirToaimPoint = aimPoint.position - new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        orientation.forward = dirToaimPoint.normalized;
 
-        playerObj.forward = dirToCombatLookAt.normalized;
+        playerObj.forward = dirToaimPoint.normalized;
+
     }
 }
