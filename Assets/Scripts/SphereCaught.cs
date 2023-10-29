@@ -18,7 +18,7 @@ public class SphereCaught : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!GameControl.gamePaused)
+        if (!GameControl.gamePaused && other.gameObject.name == "Player")
         {
             GameControl.gameEnded = true;
         }

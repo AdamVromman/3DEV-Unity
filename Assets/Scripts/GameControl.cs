@@ -66,10 +66,11 @@ public class GameControl : MonoBehaviour
 
     void ResetGame()
     {
-        player.transform.position = new Vector3(0, 0, 0.5f);
+        player.transform.position = new Vector3(0, 100.1f, 0);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        ball.transform.position = new Vector3(5, 1, 5);
+        ball.transform.position = new Vector3(5, 105, 5);
+        
     }
 
     void PlayGame()

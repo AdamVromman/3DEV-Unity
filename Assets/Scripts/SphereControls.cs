@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class SphereControls : MonoBehaviour
 {
-
-    public float speed = 10.0f;
     public Vector3 currentPosition = new Vector3();
     public Vector3 newPosition = new Vector3();
     public float time;
     public Transform player;
-    public float xyDiff = 0.0f;
-    public float zDiff = 0.0f;
+    public float xyDiff = 10f;
+    public float zDiff = 4f;
     public float movingTime = 2.0f;
     public float radius = 10.0f;
 
@@ -32,7 +30,7 @@ public class SphereControls : MonoBehaviour
     {
 
         currentPosition = transform.position;
-        if (isBallTooFar(currentPosition, player.position))
+        if (IsBallTooFar(currentPosition, player.position))
         {
             MoveTowardsPlayer();
         }
@@ -66,24 +64,52 @@ public class SphereControls : MonoBehaviour
     void MoveAwayFromPlayer()
     {
         float randomX = Random.value * xyDiff;
-        float randomY = Random.value * xyDiff;
         float randomZ = Random.value * zDiff;
         Vector3 playerPosition = player.position;
-        Vector3 direction = (transform.position - playerPosition).normalized + new Vector3(randomX, randomY, randomZ);
-        newPosition = transform.position + direction;
+        int counter = 0;
+        do
+        {
+            float randomY = Random.value * xyDiff;
+            Vector3 direction = (transform.position - playerPosition).normalized + new Vector3(randomX, randomY, randomZ);
+            newPosition = transform.position + direction;
+            if (counter > 20)
+            {
+
+
+                newPosition.y = 5;
+            }
+            counter++;
+
+        }
+        while (newPosition.y < 5);
+
     }
 
     void MoveTowardsPlayer()
     {
         float randomX = Random.value * xyDiff;
-        float randomY = Random.value * xyDiff;
         float randomZ = Random.value * zDiff;
         Vector3 playerPosition = player.position;
-        Vector3 direction = (transform.position - playerPosition).normalized + new Vector3(randomX, randomY, randomZ);
-        newPosition = transform.position - direction;
+
+        int counter = 0;
+        do
+        {
+            float randomY = Random.value * xyDiff;
+            Vector3 direction = (transform.position - playerPosition).normalized + new Vector3(randomX, randomY, randomZ);
+            newPosition = transform.position - direction;
+            if (counter > 20)
+            {
+
+
+                newPosition.y = 5;
+            }
+            counter++;
+
+        }
+        while (newPosition.y < 5);
     }
 
-    bool isBallTooFar(Vector3 ball, Vector3 player)
+    bool IsBallTooFar(Vector3 ball, Vector3 player)
     {
         return Vector3.Distance(ball, player) > radius; 
     }
