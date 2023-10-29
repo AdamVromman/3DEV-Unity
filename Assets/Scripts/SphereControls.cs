@@ -16,33 +16,46 @@ public class SphereControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Move", 0, movingTime);
+        
+        currentPosition = new Vector3(0, 105, 40);
+        newPosition = new Vector3(0, 105, 40);
     }
+
+    public void AddRepeat()
+    {
+        if (!IsInvoking())
+        {
+            InvokeRepeating("Move", 0, movingTime);
+        }
+    }
+
+    public void RemoveRepeat()
+    {
+        if (IsInvoking())
+        {
+            CancelInvoke();
+        }
+    }
+
+    public void ResetMovement()
+    {
+        newPosition = new Vector3(0, 105, 40);
+        time = 0;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        time = time + Time.deltaTime;
-        if(GameControl.gamePaused)
-        {
-            newPosition = currentPosition;
-        }
-        else {
+            time = time + Time.deltaTime;
             transform.position = Vector3.Lerp(currentPosition, newPosition, EaseInOut(time / movingTime));
-        }
-
-
-            
-        
-       
     }
 
     void Move()
     {
 
         currentPosition = transform.position;
-
-            if (IsBallTooFar(currentPosition, player.position))
+        if (IsBallTooFar(currentPosition, player.position))
             {
                 MoveTowardsPlayer();
             }
@@ -50,8 +63,6 @@ public class SphereControls : MonoBehaviour
             {
                 MoveAwayFromPlayer();
             }
-       
-        
         time = 0;
     }
 

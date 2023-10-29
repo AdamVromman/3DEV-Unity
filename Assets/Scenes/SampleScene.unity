@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 109243995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 105, z: 6.94}
+  m_LocalPosition: {x: 10.15, y: 105, z: 6.94}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -273,7 +273,7 @@ MonoBehaviour:
   currentPosition: {x: 0, y: 0, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   time: 0
-  player: {fileID: 0}
+  player: {fileID: 1813317705}
   xyDiff: 20
   zDiff: 8
   movingTime: 2
@@ -839,7 +839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683265195}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.008443945, y: 0.0043126834, z: 0.0000364177, w: 0.99995506}
+  m_LocalRotation: {x: -0.008443965, y: 0.004312718, z: 0.00003641808, w: 0.99995506}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
