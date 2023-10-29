@@ -40,9 +40,9 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !gamePaused && !gameEnded)
         {
-            Start();
+            ResetGame();
         }
         if (Input.GetKeyDown(KeyCode.Space) && gamePaused)
         {
@@ -80,7 +80,7 @@ public class GameControl : MonoBehaviour
         player.transform.rotation = new Quaternion(0, 0, 0, 0);
         player.GetComponent<Rigidbody>().velocity = Vector3.zero;
         player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        ball.transform.position = new Vector3(5, 105, 5);
+        ball.transform.position = new Vector3(0, 105, 40);
         
     }
 
@@ -107,5 +107,16 @@ public class GameControl : MonoBehaviour
         gamePaused = true;
         Time.timeScale = 0f;
     }
+
+    void ResetGame()
+    {
+        startScreen = Instantiate(startScreenSource, canvas.transform);
+        roundTime = 0.0f;
+        startRound = 0.0f;
+        PauseGame();
+        ResetPlayerAndBall();
+        
+    }
+
 
 }

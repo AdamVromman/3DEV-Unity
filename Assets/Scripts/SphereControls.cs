@@ -8,7 +8,7 @@ public class SphereControls : MonoBehaviour
     public Vector3 newPosition = new Vector3();
     public float time;
     public Transform player;
-    public float xyDiff = 10f;
+    public float xyDiff = 20f;
     public float zDiff = 4f;
     public float movingTime = 2.0f;
     public float radius = 10.0f;
@@ -23,21 +23,35 @@ public class SphereControls : MonoBehaviour
     void Update()
     {
         time = time + Time.deltaTime;
-        transform.position = Vector3.Lerp(currentPosition, newPosition, EaseInOut(time / movingTime));
+        if(GameControl.gamePaused)
+        {
+            newPosition = currentPosition;
+        }
+        else {
+            transform.position = Vector3.Lerp(currentPosition, newPosition, EaseInOut(time / movingTime));
+        }
+
+
+            
+        
+       
     }
 
     void Move()
     {
 
         currentPosition = transform.position;
-        if (IsBallTooFar(currentPosition, player.position))
-        {
-            MoveTowardsPlayer();
-        }
-        else
-        {
-            MoveAwayFromPlayer();
-        }
+
+            if (IsBallTooFar(currentPosition, player.position))
+            {
+                MoveTowardsPlayer();
+            }
+            else
+            {
+                MoveAwayFromPlayer();
+            }
+       
+        
         time = 0;
     }
 
